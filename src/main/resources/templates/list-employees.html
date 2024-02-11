@@ -1,0 +1,62 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Employee Directory</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+
+<body>
+<div class="container">
+
+    <h3>Employees</h3>
+    <hr>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <a th:href="@{/employees/showFormForAdd}" class="btn btn-primary btn-sm">
+                Add Employee
+            </a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <!-- Add a button to trigger the sort method -->
+            <form action="/employees/ByLastName" method="get">
+                <button type="submit" class="btn btn-secondary btn-sm">Sort By Last Name</button>
+            </form>
+        </div>
+        <div class="col-md-4 mb-3">
+            <!-- Add a button to trigger the sort method -->
+            <form action="/employees/BySalaryDesc" method="get">
+                <button type="submit" class="btn btn-secondary btn-sm">Sort By Salary</button>
+            </form>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-stripped">
+        <thead class="thead-dark">
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Salary</th>
+        <th>Action</th>
+        </thead>
+        <tbody>
+        <tr th:each="tempEmployee : ${employees}">
+            <td th:text="${tempEmployee.firstName}" />
+            <td th:text="${tempEmployee.lastName}" />
+            <td th:text="${tempEmployee.email}" />
+            <td th:text="${tempEmployee.salary}" />
+            <td>
+             <a th:href="@{/employees/showFormForUpdate(employeeId=${tempEmployee.id})}"
+               class="btn btn-info btn-sm">
+                Update
+             </a>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+
+</html>
